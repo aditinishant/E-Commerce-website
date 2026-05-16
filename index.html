@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERRA — Fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --sand: #E8DFD0;
+    --tan: #C8B49A;
+    --brown: #8B6F55;
+    --dark: #2C2218;
+    --bark: #5C4433;
+    --moss: #6B7B5E;
+    --rust: #B85C38;
+    --light-text: #7A6A5A;
+    --white: #FDFAF5;
+    --card-bg: #FAF6EF;
+    --border: #D8CFBF;
+    font-size: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--sand); }
+  ::-webkit-scrollbar-thumb { background: var(--tan); border-radius: 3px; }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .announce {
+    background: var(--bark);
+    color: var(--cream);
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    padding: 9px 16px;
+    text-transform: uppercase;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: var(--dark);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--light-text);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--dark); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--dark);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.15s;
+  }
+
+  .nav-actions button:hover { transform: scale(1.1); }
+
+  .cart-btn { position: relative; }
+
+  .cart-count {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: var(--rust);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .cart-count.hidden { display: none; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 22px;
+    height: 1.5px;
+    background: var(--dark);
+    display: block;
+    transition: all 0.3s;
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; animation: fadeIn 0.4s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ══════════════════════════════
+     HOME PAGE
+  ══════════════════════════════ */
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #3D2B1F 0%, #5C4433 50%, #8B6F55 100%);
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-text {
+    padding: 80px 80px 80px 120px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 5vw, 80px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+
+  .hero-title em { font-style: italic; color: var(--tan); }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 380px;
+  }
+
+  .btn-primary {
+    background: var(--cream);
+    color: var(--dark);
+    border: none;
+    padding: 15px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background: var(--tan);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(245,240,232,0.4);
+    padding: 15px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-weight: 500;
+    margin-left: 12px;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--cream);
+    background: rgba(245,240,232,0.1);
+  }
+
+  .hero-image-area {
+    height: 88vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #7A5C44 0%, #4A3526 60%, #2C1F14 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  /* Decorative fashion silhouette */
+  .hero-img-placeholder svg { opacity: 0.6; }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 60px;
+    left: -20px;
+    background: var(--rust);
+    color: white;
+    padding: 16px 24px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Categories */
+  .section { max-width: 1280px; margin: 0 auto; padding: 80px 24px; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 16px;
+    height: 480px;
+  }
+
+  .cat-card {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .cat-bg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cat-card:hover .cat-bg { transform: scale(1.04); }
+
+  .cat-card:nth-child(1) .cat-bg { background: linear-gradient(160deg, #8B6F55, #5C4433); }
+  .cat-card:nth-child(2) .cat-bg { background: linear-gradient(160deg, #6B7B5E, #4A5840); }
+  .cat-card:nth-child(3) .cat-bg { background: linear-gradient(160deg, #B85C38, #8B3D20); }
+
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+  }
+
+  .cat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .cat-count { font-size: 12px; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
+
+  .cat-arrow {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+  }
+
+  .cat-card:hover .cat-arrow { opacity: 1; }
+
+  /* Featured Products */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
+  }
+
+  .product-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    border-radius: 2px;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(44,34,24,0.12);
+  }
+
+  .product-img {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-img-bg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-card:hover .product-img-bg { transform: scale(1.06); }
+
+  .product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--rust);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: 500;
+  }
+
+  .product-badge.new { background: var(--moss); }
+
+  .product-actions {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: all 0.3s;
+  }
+
+  .product-card:hover .product-actions {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .action-btn {
+    width: 36px;
+    height: 36px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    color: var(--dark);
+  }
+
+  .action-btn:hover { background: var(--dark); color: var(--cream); }
+
+  .product-info { padding: 16px 18px 20px; }
+
+  .product-category {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .product-price-row { display: flex; align-items: center; gap: 10px; }
+
+  .product-price {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--dark);
+  }
+
+  .product-price-old {
+    font-size: 13px;
+    color: var(--light-text);
+    text-decoration: line-through;
+  }
+
+  .add-to-cart-btn {
+    margin-top: 14px;
+    width: 100%;
+    background: var(--dark);
+    color: var(--cream);
+    border: none;
+    padding: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .add-to-cart-btn:hover { background: var(--bark); }
+
+  /* Banner */
+  .promo-banner {
+    background: var(--bark);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .promo-text { padding: 80px 120px; }
+  .promo-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--tan); margin-bottom: 20px; }
+  .promo-title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; line-height: 1.1; margin-bottom: 20px; }
+  .promo-title em { font-style: italic; }
+  .promo-sub { font-size: 14px; color: rgba(245,240,232,0.7); margin-bottom: 36px; max-width: 340px; line-height: 1.7; }
+  .promo-image { height: 400px; background: linear-gradient(135deg, #8B6F55, #4A3526); display: flex; align-items: center; justify-content: center; }
+
+  /* Features */
+  .features-strip {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .features-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .feature-item { display: flex; align-items: center; gap: 16px; }
+  .feature-icon { font-size: 22px; color: var(--brown); flex-shrink: 0; }
+  .feature-label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; margin-bottom: 2px; }
+  .feature-desc { font-size: 12px; color: var(--light-text); }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .testimonial-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 2px;
+  }
+
+  .stars { color: var(--rust); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+
+  .testimonial-author { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--brown); font-weight: 500; }
+
+  /* Newsletter */
+  .newsletter { background: var(--dark); padding: 80px 24px; text-align: center; }
+  .newsletter-title { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 300; color: var(--cream); margin-bottom: 12px; }
+  .newsletter-sub { font-size: 14px; color: rgba(245,240,232,0.6); margin-bottom: 36px; }
+
+  .newsletter-form {
+    display: flex;
+    max-width: 480px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 14px 20px;
+    background: rgba(245,240,232,0.1);
+    border: 1px solid rgba(245,240,232,0.2);
+    border-right: none;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .newsletter-form input::placeholder { color: rgba(245,240,232,0.4); }
+
+  .newsletter-form button {
+    background: var(--rust);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .newsletter-form button:hover { background: var(--bark); }
+
+  /* Footer */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(245,240,232,0.1);
+    color: rgba(245,240,232,0.6);
+    padding: 60px 24px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: var(--cream);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .footer-brand-desc { font-size: 13px; line-height: 1.7; max-width: 260px; margin-bottom: 24px; }
+
+  .footer-socials { display: flex; gap: 12px; }
+
+  .social-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(245,240,232,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    color: rgba(245,240,232,0.6);
+  }
+
+  .social-btn:hover { border-color: var(--tan); color: var(--tan); }
+
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-links li a {
+    text-decoration: none;
+    font-size: 13px;
+    color: rgba(245,240,232,0.5);
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .footer-links li a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(245,240,232,0.1);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  /* ══════════════════════════════
+     SHOP PAGE
+  ══════════════════════════════ */
+
+  .shop-header {
+    background: linear-gradient(135deg, #2C2218, #5C4433);
+    padding: 60px 24px;
+    text-align: center;
+  }
+
+  .shop-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 4px;
+  }
+
+  .shop-header p { color: rgba(245,240,232,0.6); margin-top: 8px; font-size: 14px; }
+
+  .breadcrumb {
+    font-size: 12px;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .shop-layout {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+  }
+
+  /* Filter Sidebar */
+  .filter-sidebar { position: sticky; top: 88px; height: fit-content; }
+
+  .filter-group { border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 24px; }
+
+  .filter-group:last-child { border-bottom: none; }
+
+  .filter-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .filter-options { display: flex; flex-direction: column; gap: 10px; }
+
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--light-text);
+    transition: color 0.2s;
+  }
+
+  .filter-option:hover { color: var(--dark); }
+
+  .filter-option input[type="checkbox"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--tan);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .filter-option input[type="checkbox"]:checked {
+    background: var(--dark);
+    border-color: var(--dark);
+  }
+
+  .filter-option input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -1px;
+    left: 2px;
+    color: white;
+    font-size: 11px;
+  }
+
+  .color-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .color-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .color-swatch.active, .color-swatch:hover { border-color: var(--dark); }
+
+  .price-range { display: flex; flex-direction: column; gap: 12px; }
+
+  .price-range input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background: var(--tan);
+    outline: none;
+    border-radius: 2px;
+  }
+
+  .price-range input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--dark);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .price-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--light-text); }
+
+  /* Shop Controls */
+  .shop-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .results-count { font-size: 13px; color: var(--light-text); }
+
+  .shop-controls-right { display: flex; align-items: center; gap: 16px; }
+
+  .sort-select {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--dark);
+    cursor: pointer;
+    outline: none;
+    letter-spacing: 0.5px;
+  }
+
+  .view-toggle { display: flex; gap: 4px; }
+
+  .view-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--light-text);
+    transition: all 0.2s;
+  }
+
+  .view-btn.active { background: var(--dark); color: var(--cream); border-color: var(--dark); }
+
+  /* Search bar in shop */
+  .shop-search {
+    display: flex;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+
+  .shop-search input {
+    flex: 1;
+    padding: 11px 16px;
+    border: 1px solid var(--border);
+    border-right: none;
+    background: var(--card-bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--dark);
+    outline: none;
+  }
+
+  .shop-search input:focus { border-color: var(--brown); }
+
+  .shop-search button {
+    padding: 11px 18px;
+    background: var(--dark);
+    color: var(--cream);
+    border: 1px solid var(--dark);
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .shop-search button:hover { background: var(--bark); }
+
+  /* Active filters */
+  .active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .filter-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--sand);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--dark);
+    transition: all 0.2s;
+  }
+
+  .filter-tag:hover { background: var(--tan); }
+  .filter-tag span { font-size: 13px; }
+
+  /* Product list view */
+  .products-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .list-view .product-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+
+  .list-view .product-img { aspect-ratio: unset; height: 220px; }
+
+  .list-view .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px 32px;
+  }
+
+  /* ══════════════════════════════
+     CART PAGE
+  ══════════════════════════════ */
+
+  .cart-header {
+    background: linear-gradient(135deg, #2C2218, #5C4433);
+    padding: 60px 24px;
+    text-align: center;
+  }
+
+  .cart-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .cart-layout {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .cart-items { display: flex; flex-direction: column; gap: 0; }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cart-item-img {
+    width: 100px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .cart-item-img-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-item-details { flex: 1; }
+
+  .cart-item-cat {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 4px;
+  }
+
+  .cart-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--dark);
+  }
+
+  .cart-item-meta { font-size: 12px; color: var(--light-text); margin-bottom: 12px; }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: fit-content;
+    border: 1px solid var(--border);
+  }
+
+  .qty-btn {
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--dark);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qty-btn:hover { background: var(--sand); }
+
+  .qty-val {
+    width: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--dark);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    padding: 4px 0;
+    font-weight: 500;
+  }
+
+  .cart-item-price-col { text-align: right; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+  .cart-item-price { font-size: 18px; font-weight: 500; color: var(--dark); }
+
+  .remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--light-text);
+    transition: color 0.2s;
+  }
+
+  .remove-btn:hover { color: var(--rust); }
+
+  .cart-summary {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 28px;
+    position: sticky;
+    top: 88px;
+  }
+
+  .summary-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .summary-row.total {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 16px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .summary-label { color: var(--light-text); }
+  .summary-value { color: var(--dark); font-weight: 500; }
+  .summary-row.total .summary-label { color: var(--dark); }
+
+  .coupon-row {
+    display: flex;
+    margin: 20px 0;
+  }
+
+  .coupon-row input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-right: none;
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    outline: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .coupon-row input::placeholder { text-transform: none; letter-spacing: 0; }
+
+  .coupon-row button {
+    padding: 10px 16px;
+    background: var(--dark);
+    color: var(--cream);
+    border: 1px solid var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .checkout-btn {
+    width: 100%;
+    background: var(--bark);
+    color: var(--cream);
+    border: none;
+    padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.25s;
+    margin-top: 8px;
+  }
+
+  .checkout-btn:hover { background: var(--dark); }
+
+  .payment-icons {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    justify-content: center;
+  }
+
+  .payment-icon {
+    background: var(--sand);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--light-text);
+    border-radius: 3px;
+  }
+
+  .empty-cart {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--light-text);
+  }
+
+  .empty-cart-icon { font-size: 60px; margin-bottom: 20px; opacity: 0.3; }
+
+  .empty-cart h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .empty-cart p { font-size: 14px; margin-bottom: 28px; }
+
+  /* ══════════════════════════════
+     PRODUCT DETAIL PAGE
+  ══════════════════════════════ */
+
+  .detail-layout {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .detail-images { position: sticky; top: 88px; }
+
+  .detail-main-img {
+    aspect-ratio: 3/4;
+    margin-bottom: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detail-thumbs { display: flex; gap: 8px; }
+
+  .detail-thumb {
+    width: 72px;
+    height: 88px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .detail-thumb.active { border-color: var(--dark); }
+
+  .detail-thumb:hover { border-color: var(--tan); }
+
+  .detail-info { padding-top: 8px; }
+
+  .detail-cat { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown); margin-bottom: 10px; }
+
+  .detail-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .detail-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .detail-stars { color: var(--rust); font-size: 14px; }
+  .detail-review-count { font-size: 12px; color: var(--light-text); }
+
+  .detail-price {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .detail-price-old { font-size: 18px; color: var(--light-text); text-decoration: line-through; font-weight: 400; }
+
+  .detail-desc {
+    font-size: 14px;
+    color: var(--light-text);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .size-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--dark);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .size-guide { color: var(--brown); cursor: pointer; font-weight: 400; text-decoration: underline; }
+
+  .sizes { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+
+  .size-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .size-btn:hover, .size-btn.active {
+    background: var(--dark);
+    color: var(--cream);
+    border-color: var(--dark);
+  }
+
+  .size-btn.unavailable {
+    color: var(--border);
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  .size-btn.unavailable:hover { background: var(--card-bg); color: var(--border); border-color: var(--border); }
+
+  .color-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--dark);
+  }
+
+  .detail-colors { display: flex; gap: 10px; margin-bottom: 28px; }
+
+  .detail-add-row { display: flex; gap: 12px; margin-bottom: 28px; }
+
+  .detail-qty { display: flex; align-items: center; border: 1px solid var(--border); }
+
+  .detail-add-btn {
+    flex: 1;
+    background: var(--dark);
+    color: var(--cream);
+    border: none;
+    padding: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .detail-add-btn:hover { background: var(--bark); }
+
+  .wishlist-btn {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--light-text);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .wishlist-btn:hover { border-color: var(--rust); color: var(--rust); }
+  .wishlist-btn.wishlisted { color: var(--rust); border-color: var(--rust); }
+
+  .detail-meta { font-size: 12px; color: var(--light-text); line-height: 2; }
+  .detail-meta span { color: var(--dark); font-weight: 500; }
+
+  /* Tabs */
+  .detail-tabs { max-width: 1280px; margin: 0 auto; padding: 0 24px 60px; }
+
+  .tab-nav {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+    gap: 0;
+  }
+
+  .tab-btn {
+    padding: 14px 28px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--light-text);
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .tab-btn.active { border-bottom-color: var(--dark); color: var(--dark); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  .tab-content p { font-size: 14px; color: var(--light-text); line-height: 1.9; max-width: 680px; margin-bottom: 16px; }
+
+  /* ══════════════════════════════
+     TOAST
+  ══════════════════════════════ */
+
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--dark);
+    color: var(--cream);
+    padding: 14px 22px;
+    font-size: 13px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 2px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-width: 320px;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { font-size: 16px; color: var(--tan); }
+
+  /* ══════════════════════════════
+     MOBILE NAV
+  ══════════════════════════════ */
+
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark);
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    padding: 80px 36px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-nav.open { transform: translateX(0); }
+
+  .mobile-nav-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--cream);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .mobile-nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .mobile-nav-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--cream);
+    text-decoration: none;
+    cursor: pointer;
+    letter-spacing: 2px;
+    display: block;
+    transition: color 0.2s;
+  }
+
+  .mobile-nav-links a:hover { color: var(--tan); }
+
+  /* ══════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════ */
+
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-image-area { display: none; }
+    .hero-text { padding: 80px 40px; }
+    .category-grid { grid-template-columns: 1fr 1fr; height: auto; }
+    .category-grid .cat-card:first-child { grid-column: span 2; height: 280px; }
+    .category-grid .cat-card:not(:first-child) { height: 220px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .promo-banner { grid-template-columns: 1fr; }
+    .promo-text { padding: 60px 40px; }
+    .promo-image { display: none; }
+    .features-inner { grid-template-columns: repeat(2,1fr); }
+    .detail-layout { grid-template-columns: 1fr; gap: 32px; }
+    .detail-images { position: static; }
+    .cart-layout { grid-template-columns: 1fr; }
+    .cart-summary { position: static; }
+    .shop-layout { grid-template-columns: 200px 1fr; gap: 32px; }
+    .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .shop-layout { grid-template-columns: 1fr; }
+    .filter-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 280px;
+      background: var(--white);
+      z-index: 1500;
+      padding: 60px 24px 24px;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+    }
+    .filter-sidebar.open { transform: translateX(0); }
+    .filter-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--dark);
+      display: block !important;
+    }
+    .mobile-filter-btn {
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--dark);
+      color: var(--cream);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .hero-text { padding: 60px 24px; }
+    .section { padding: 56px 24px; }
+    .section-title { font-size: 34px; }
+    .category-grid { grid-template-columns: 1fr; height: auto; }
+    .category-grid .cat-card { grid-column: span 1 !important; height: 200px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .features-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .promo-text { padding: 48px 24px; }
+    .cart-item { grid-template-columns: 80px 1fr; }
+    .cart-item-price-col { grid-column: span 2; flex-direction: row; justify-content: space-between; align-items: center; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid rgba(245,240,232,0.2); }
+  }
+
+  @media (max-width: 480px) {
+    .features-inner { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .hero-title { font-size: 40px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  .mobile-filter-btn { display: none; }
+  .filter-close-btn { display: none; }
+  .filter-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1400; }
+  .filter-overlay.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announce">Free shipping on orders over ₹2,499 &nbsp;|&nbsp; New arrivals every Friday</div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" onclick="showPage('home')">TERRA</a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a onclick="showShop()" id="nav-shop">Shop</a></li>
+      <li><a onclick="showPage('home')" id="nav-collections">Collections</a></li>
+      <li><a onclick="showPage('home')" id="nav-about">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button onclick="toggleSearch()" title="Search">🔍</button>
+      <button onclick="showPage('home')" title="Wishlist">🤍</button>
+      <button class="cart-btn" onclick="showPage('cart')" title="Cart">
+        🛒
+        <span class="cart-count hidden" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
+  <ul class="mobile-nav-links">
+    <li><a onclick="showPage('home');toggleMobileNav()">Home</a></li>
+    <li><a onclick="showShop();toggleMobileNav()">Shop</a></li>
+    <li><a onclick="showPage('home');toggleMobileNav()">Collections</a></li>
+    <li><a onclick="showPage('home');toggleMobileNav()">About</a></li>
+    <li><a onclick="showPage('cart');toggleMobileNav()">Cart</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════
+     HOME PAGE
+═══════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">New Collection — Spring 2025</p>
+      <h1 class="hero-title">Wear the<br><em>Earth's</em><br>Palette</h1>
+      <p class="hero-sub">Timeless pieces crafted from natural fibres. Rooted in sustainability, defined by understated elegance.</p>
+      <button class="btn-primary" onclick="showShop()">Shop Collection</button>
+      <button class="btn-outline" onclick="showPage('home')">Our Story</button>
+    </div>
+    <div class="hero-image-area">
+      <div class="hero-img-placeholder">
+        <svg width="160" height="240" viewBox="0 0 160 240" fill="none">
+          <ellipse cx="80" cy="40" rx="28" ry="28" fill="rgba(200,180,154,0.4)"/>
+          <rect x="44" y="72" width="72" height="100" rx="4" fill="rgba(200,180,154,0.3)"/>
+          <rect x="20" y="80" width="28" height="80" rx="4" fill="rgba(200,180,154,0.25)"/>
+          <rect x="112" y="80" width="28" height="80" rx="4" fill="rgba(200,180,154,0.25)"/>
+          <rect x="50" y="172" width="24" height="60" rx="3" fill="rgba(200,180,154,0.2)"/>
+          <rect x="86" y="172" width="24" height="60" rx="3" fill="rgba(200,180,154,0.2)"/>
+        </svg>
+        <p style="color:rgba(200,180,154,0.5);font-size:11px;letter-spacing:3px;text-transform:uppercase;">Spring '25</p>
+      </div>
+      <div class="hero-badge">Up to 30% Off</div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <div class="section">
+    <p class="section-label">Browse by</p>
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="category-grid">
+      <div class="cat-card" onclick="filterByCategory('Women')">
+        <div class="cat-bg" style="height:100%;">
+          <svg width="80" height="130" viewBox="0 0 80 130" fill="none" opacity="0.4">
+            <ellipse cx="40" cy="18" rx="14" ry="14" fill="#C8B49A"/>
+            <path d="M20 36 Q40 28 60 36 L68 90 Q40 80 12 90 Z" fill="#C8B49A"/>
+            <path d="M12 90 L10 130" stroke="#C8B49A" stroke-width="8" stroke-linecap="round"/>
+            <path d="M68 90 L70 130" stroke="#C8B49A" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="cat-overlay">
+          <h3 class="cat-name">Women</h3>
+          <p class="cat-count">124 Items</p>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card" onclick="filterByCategory('Men')">
+        <div class="cat-bg" style="height:100%;">
+          <svg width="70" height="120" viewBox="0 0 70 120" fill="none" opacity="0.4">
+            <ellipse cx="35" cy="16" rx="12" ry="12" fill="#9FE1CB"/>
+            <rect x="16" y="30" width="38" height="52" rx="3" fill="#9FE1CB"/>
+            <rect x="4" y="34" width="14" height="44" rx="3" fill="#9FE1CB" opacity="0.7"/>
+            <rect x="52" y="34" width="14" height="44" rx="3" fill="#9FE1CB" opacity="0.7"/>
+            <rect x="18" y="82" width="13" height="36" rx="3" fill="#9FE1CB" opacity="0.6"/>
+            <rect x="39" y="82" width="13" height="36" rx="3" fill="#9FE1CB" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="cat-overlay">
+          <h3 class="cat-name">Men</h3>
+          <p class="cat-count">98 Items</p>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card" onclick="filterByCategory('Accessories')">
+        <div class="cat-bg" style="height:100%;">
+          <svg width="70" height="70" viewBox="0 0 70 70" fill="none" opacity="0.5">
+            <circle cx="35" cy="35" r="28" stroke="#F0997B" stroke-width="6" fill="none"/>
+            <circle cx="35" cy="35" r="16" stroke="#F0997B" stroke-width="4" fill="none"/>
+            <line x1="35" y1="7" x2="35" y2="19" stroke="#F0997B" stroke-width="3"/>
+            <line x1="63" y1="35" x2="51" y2="35" stroke="#F0997B" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="cat-overlay">
+          <h3 class="cat-name">Accessories</h3>
+          <p class="cat-count">56 Items</p>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Products -->
+  <div class="section" style="padding-top:0;">
+    <p class="section-label">Handpicked for you</p>
+    <h2 class="section-title">Featured Pieces</h2>
+    <div class="products-grid" id="featuredProducts"></div>
+  </div>
+
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    <div class="promo-text">
+      <p class="promo-eyebrow">Limited offer</p>
+      <h2 class="promo-title">Summer<br><em>Essentials</em></h2>
+      <p class="promo-sub">Lightweight linen, breathable cotton, and naturally dyed silks. Our summer edit is here.</p>
+      <button class="btn-primary" onclick="showShop()">Explore Now</button>
+    </div>
+    <div class="promo-image">
+      <svg width="100" height="160" viewBox="0 0 100 160" fill="none" opacity="0.4">
+        <path d="M50 10 Q70 30 65 60 Q60 90 50 110 Q40 90 35 60 Q30 30 50 10Z" fill="#C8B49A"/>
+        <ellipse cx="50" cy="130" rx="20" ry="8" fill="#C8B49A" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Features Strip -->
+  <div class="features-strip">
+    <div class="features-inner">
+      <div class="feature-item">
+        <span class="feature-icon">🌿</span>
+        <div>
+          <p class="feature-label">Sustainably Made</p>
+          <p class="feature-desc">Ethical production, natural materials</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📦</span>
+        <div>
+          <p class="feature-label">Free Shipping</p>
+          <p class="feature-desc">On all orders above ₹2,499</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">↩️</span>
+        <div>
+          <p class="feature-label">Easy Returns</p>
+          <p class="feature-desc">30-day hassle-free returns</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔒</span>
+        <div>
+          <p class="feature-label">Secure Payment</p>
+          <p class="feature-desc">UPI, Cards, Net Banking</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="section">
+    <p class="section-label">What they say</p>
+    <h2 class="section-title">Customer Stories</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The linen kurta I ordered is simply divine. The fabric quality is outstanding and the fit is perfect. Will definitely shop again."</p>
+        <p class="testimonial-author">— Priya Sharma, Mumbai</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Finally a brand that understands earthy tones. My entire wardrobe is now TERRA. The packaging is beautiful too."</p>
+        <p class="testimonial-author">— Arjun Mehta, Delhi</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★☆</div>
+        <p class="testimonial-text">"Sustainable fashion that doesn't compromise on style. The cotton co-ord set is my most-complimented outfit this season."</p>
+        <p class="testimonial-author">— Sneha Reddy, Bengaluru</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <h2 class="newsletter-title">Join the Terra Circle</h2>
+    <p class="newsletter-sub">Early access, exclusive offers, and stories from the fields.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Enter your email address" id="newsletterEmail">
+      <button onclick="subscribeNewsletter()">Subscribe</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-brand-name">TERRA</span>
+          <p class="footer-brand-desc">Rooted in nature, designed for life. We create timeless clothing from sustainably sourced natural fibres.</p>
+          <div class="footer-socials">
+            <div class="social-btn">f</div>
+            <div class="social-btn">in</div>
+            <div class="social-btn">📷</div>
+            <div class="social-btn">𝕏</div>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Shop</p>
+          <ul class="footer-links">
+            <li><a onclick="showShop()">New Arrivals</a></li>
+            <li><a onclick="filterByCategory('Women')">Women</a></li>
+            <li><a onclick="filterByCategory('Men')">Men</a></li>
+            <li><a onclick="filterByCategory('Accessories')">Accessories</a></li>
+            <li><a onclick="showShop()">Sale</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Info</p>
+          <ul class="footer-links">
+            <li><a>About Us</a></li>
+            <li><a>Sustainability</a></li>
+            <li><a>Our Materials</a></li>
+            <li><a>Careers</a></li>
+            <li><a>Press</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Help</p>
+          <ul class="footer-links">
+            <li><a>Shipping & Returns</a></li>
+            <li><a>Size Guide</a></li>
+            <li><a>Care Instructions</a></li>
+            <li><a>FAQ</a></li>
+            <li><a>Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Terra Fashion. All rights reserved.</span>
+        <span>Privacy Policy · Terms of Service · Cookie Settings</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════════════
+     SHOP PAGE
+═══════════════════════════ -->
+<div class="page" id="page-shop">
+
+  <div class="shop-header">
+    <p class="breadcrumb">Home / Shop</p>
+    <h1>The Collection</h1>
+    <p id="shopSubtitle">Explore all styles</p>
+  </div>
+
+  <!-- Filter Overlay -->
+  <div class="filter-overlay" id="filterOverlay" onclick="closeFilterSidebar()"></div>
+
+  <div class="shop-layout">
+
+    <!-- Filter Sidebar -->
+    <aside class="filter-sidebar" id="filterSidebar">
+      <button class="filter-close-btn" onclick="closeFilterSidebar()">✕</button>
+
+      <div class="filter-group">
+        <p class="filter-title">Category</p>
+        <div class="filter-options">
+          <label class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Women" class="cat-filter"> Women</label>
+          <label class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Men" class="cat-filter"> Men</label>
+          <label class="filter-option"><input type="checkbox" onchange="applyFilters()" value="Accessories" class="cat-filter"> Accessories</label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <p class="filter-title">Price Range</p>
+        <div class="price-range">
+          <input type="range" min="0" max="10000" step="100" value="10000" id="priceSlider" oninput="updatePriceLabel(this.value);applyFilters()">
+          <div class="price-label"><span>₹0</span><span id="priceLabel">₹10,000</span></div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <p class="filter-title">Color</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background:#C8B49A;" title="Tan" onclick="toggleColorFilter('Tan',this)"></div>
+          <div class="color-swatch" style="background:#6B7B5E;" title="Moss" onclick="toggleColorFilter('Moss',this)"></div>
+          <div class="color-swatch" style="background:#B85C38;" title="Rust" onclick="toggleColorFilter('Rust',this)"></div>
+          <div class="color-swatch" style="background:#3D2B1F;" title="Dark Brown" onclick="toggleColorFilter('Dark Brown',this)"></div>
+          <div class="color-swatch" style="background:#E8DFD0;" title="Cream" onclick="toggleColorFilter('Cream',this)"></div>
+          <div class="color-swatch" style="background:#8B9E8A;" title="Sage" onclick="toggleColorFilter('Sage',this)"></div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <p class="filter-title">Availability</p>
+        <div class="filter-options">
+          <label class="filter-option"><input type="checkbox" onchange="applyFilters()" id="inStockFilter"> In Stock Only</label>
+          <label class="filter-option"><input type="checkbox" onchange="applyFilters()" id="saleFilter"> On Sale</label>
+        </div>
+      </div>
+
+      <button onclick="clearFilters()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1px solid var(--border);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--light-text);transition:all 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='none'">Clear All Filters</button>
+    </aside>
+
+    <!-- Products Area -->
+    <div>
+      <!-- Search -->
+      <div class="shop-search">
+        <input type="text" placeholder="Search products…" id="shopSearch" oninput="applyFilters()">
+        <button>🔍</button>
+      </div>
+
+      <!-- Active filter tags -->
+      <div class="active-filters" id="activeFilters"></div>
+
+      <!-- Controls -->
+      <div class="shop-controls">
+        <p class="results-count" id="resultsCount">Showing 0 products</p>
+        <div class="shop-controls-right">
+          <button class="mobile-filter-btn" onclick="openFilterSidebar()">⚙ Filters</button>
+          <select class="sort-select" onchange="applyFilters()" id="sortSelect">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="name-asc">Name: A–Z</option>
+            <option value="newest">Newest First</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid view">⊞</button>
+            <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="List view">≡</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-grid" id="shopProducts"></div>
+    </div>
+
+  </div>
+
+  <!-- Footer (reused) -->
+  <footer style="margin-top:60px;">
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <span>© 2025 Terra Fashion. All rights reserved.</span>
+        <span style="cursor:pointer;" onclick="showPage('home')">Back to Home</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════
+     PRODUCT DETAIL PAGE
+═══════════════════════════ -->
+<div class="page" id="page-detail">
+  <div class="detail-layout" id="detailContent"></div>
+  <div class="detail-tabs" id="detailTabs"></div>
+</div>
+
+<!-- ═══════════════════════════
+     CART PAGE
+═══════════════════════════ -->
+<div class="page" id="page-cart">
+  <div class="cart-header">
+    <p class="breadcrumb">Home / Cart</p>
+    <h1>Your Cart</h1>
+  </div>
+  <div id="cartContent"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg">Added to cart</span>
+</div>
+
+<script>
+// ═══════════════════════
+// DATA
+// ═══════════════════════
+const products = [
+  { id:1, name:"Linen Wrap Dress", category:"Women", price:3299, oldPrice:4599, colors:["Tan","Rust","Cream"], sizes:["XS","S","M","L","XL"], badge:"Sale", img:"linear-gradient(160deg,#C8B49A,#8B6F55)", description:"A flowing wrap dress in 100% Belgian linen. The adjustable tie waist flatters all figures, while the midi length offers elegant coverage. Machine washable. Ethically made in Jaipur.", inStock:true, isNew:false, rating:4.8, reviews:124 },
+  { id:2, name:"Cotton Co-ord Set", category:"Women", price:4199, oldPrice:null, colors:["Moss","Sage"], sizes:["S","M","L","XL"], badge:"New", img:"linear-gradient(160deg,#6B7B5E,#4A5840)", description:"A relaxed co-ord set in hand-woven cotton featuring wide-leg trousers and a cropped blouse. The moss-dyed fabric is both breathable and beautifully textured.", inStock:true, isNew:true, rating:4.9, reviews:87 },
+  { id:3, name:"Oversized Linen Shirt", category:"Men", price:2499, oldPrice:2999, colors:["Cream","Dark Brown","Tan"], sizes:["S","M","L","XL","XXL"], badge:"Sale", img:"linear-gradient(160deg,#E8DFD0,#C8B49A)", description:"A generously cut linen shirt with a relaxed silhouette. Drop shoulders and chest pocket detailing. Perfect for casual days or layering. 100% natural linen.", inStock:true, isNew:false, rating:4.7, reviews:56 },
+  { id:4, name:"Terra Tote Bag", category:"Accessories", price:1799, oldPrice:null, colors:["Tan","Dark Brown"], sizes:["One Size"], badge:"New", img:"linear-gradient(160deg,#8B6F55,#5C4433)", description:"Handcrafted from vegetable-tanned leather, this roomy tote carries your everyday essentials beautifully. Develops a gorgeous patina with use.", inStock:true, isNew:true, rating:5.0, reviews:43 },
+  { id:5, name:"Kalamkari Print Kurta", category:"Women", price:3599, oldPrice:null, colors:["Rust","Cream"], sizes:["XS","S","M","L","XL"], badge:null, img:"linear-gradient(160deg,#B85C38,#7A3A20)", description:"A hand-painted Kalamkari kurta featuring traditional motifs rendered in natural dyes. Each piece is unique. Paired with straight trousers for a complete look.", inStock:true, isNew:false, rating:4.6, reviews:92 },
+  { id:6, name:"Structured Blazer", category:"Men", price:5999, oldPrice:7499, colors:["Dark Brown","Moss"], sizes:["S","M","L","XL","XXL"], badge:"Sale", img:"linear-gradient(160deg,#3D2B1F,#5C4433)", description:"A slim-fit blazer crafted from a natural wool blend. Fully lined with an organic cotton interior. Two button closure and side vents for ease of movement.", inStock:true, isNew:false, rating:4.8, reviews:34 },
+  { id:7, name:"Macrame Earrings", category:"Accessories", price:699, oldPrice:null, colors:["Tan","Cream"], sizes:["One Size"], badge:"New", img:"linear-gradient(160deg,#C8B49A,#8B6F55)", description:"Handknotted macrame earrings using natural cotton rope. Lightweight and bohemian. Each pair is handmade by artisans in Rajasthan.", inStock:true, isNew:true, rating:4.5, reviews:28 },
+  { id:8, name:"Khadi Lounge Set", category:"Men", price:3299, oldPrice:null, colors:["Cream","Sage","Moss"], sizes:["S","M","L","XL","XXL"], badge:null, img:"linear-gradient(160deg,#8B9E8A,#5C7A5A)", description:"Handspun khadi lounge set — the perfect weekend wear. The drawstring waist trousers and boxy tee are soft, breathable and incredibly comfortable.", inStock:true, isNew:false, rating:4.7, reviews:61 },
+];
+
+let cart = JSON.parse(localStorage.getItem('terra_cart') || '[]');
+let currentPage = 'home';
+let currentProduct = null;
+let selectedColorFilters = [];
+let isGridView = true;
+
+// ═══════════════════════
+// NAVIGATION
+// ═══════════════════════
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  currentPage = page;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateNavActive(page);
+  if (page === 'cart') renderCart();
+  if (page === 'home') renderFeaturedProducts();
+}
+
+function showShop(cat) {
+  showPage('shop');
+  if (cat) {
+    document.querySelectorAll('.cat-filter').forEach(cb => { cb.checked = cb.value === cat; });
+  }
+  applyFilters();
+  if (cat) document.getElementById('shopSubtitle').textContent = cat;
+  else document.getElementById('shopSubtitle').textContent = 'Explore all styles';
+}
+
+function filterByCategory(cat) {
+  showShop(cat);
+}
+
+function updateNavActive(page) {
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (page === 'home') document.getElementById('nav-home').classList.add('active');
+  else if (page === 'shop') document.getElementById('nav-shop').classList.add('active');
+}
+
+function toggleMobileNav() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+
+// ═══════════════════════
+// PRODUCT CARD RENDERING
+// ═══════════════════════
+function productCardHTML(p) {
+  const badgeHTML = p.badge ? `<div class="product-badge ${p.isNew ? 'new':''}">${p.badge}</div>` : '';
+  const oldPriceHTML = p.oldPrice ? `<span class="product-price-old">₹${p.oldPrice.toLocaleString('en-IN')}</span>` : '';
+  return `
+    <div class="product-card" id="pc-${p.id}">
+      <div class="product-img">
+        <div class="product-img-bg" style="background:${p.img};">
+          <svg width="60" height="90" viewBox="0 0 60 90" fill="none" opacity="0.35">
+            <ellipse cx="30" cy="12" rx="10" ry="10" fill="rgba(245,240,232,0.6)"/>
+            <path d="M12 24 Q30 18 48 24 L52 68 Q30 60 8 68 Z" fill="rgba(245,240,232,0.5)"/>
+            <rect x="9" y="68" width="8" height="20" rx="2" fill="rgba(245,240,232,0.4)"/>
+            <rect x="43" y="68" width="8" height="20" rx="2" fill="rgba(245,240,232,0.4)"/>
+          </svg>
+        </div>
+        ${badgeHTML}
+        <div class="product-actions">
+          <button class="action-btn" onclick="event.stopPropagation();showDetail(${p.id})" title="Quick view">👁</button>
+          <button class="action-btn" onclick="event.stopPropagation();showToast('Added to wishlist')" title="Wishlist">🤍</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-category">${p.category}</p>
+        <h3 class="product-name" onclick="showDetail(${p.id})" style="cursor:pointer;">${p.name}</h3>
+        <div class="product-price-row">
+          <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+          ${oldPriceHTML}
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+      </div>
+    </div>`;
+}
+
+function renderFeaturedProducts() {
+  const container = document.getElementById('featuredProducts');
+  if (!container) return;
+  container.innerHTML = products.slice(0,4).map(productCardHTML).join('');
+}
+
+// ═══════════════════════
+// SHOP PAGE
+// ═══════════════════════
+function applyFilters() {
+  const search = document.getElementById('shopSearch').value.toLowerCase();
+  const checkedCats = [...document.querySelectorAll('.cat-filter:checked')].map(c => c.value);
+  const maxPrice = parseInt(document.getElementById('priceSlider').value);
+  const inStockOnly = document.getElementById('inStockFilter').checked;
+  const saleOnly = document.getElementById('saleFilter').checked;
+  const sortVal = document.getElementById('sortSelect').value;
+
+  let filtered = products.filter(p => {
+    if (search && !p.name.toLowerCase().includes(search) && !p.category.toLowerCase().includes(search)) return false;
+    if (checkedCats.length && !checkedCats.includes(p.category)) return false;
+    if (p.price > maxPrice) return false;
+    if (inStockOnly && !p.inStock) return false;
+    if (saleOnly && !p.oldPrice) return false;
+    if (selectedColorFilters.length && !selectedColorFilters.some(c => p.colors.includes(c))) return false;
+    return true;
+  });
+
+  if (sortVal === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+  else if (sortVal === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+  else if (sortVal === 'name-asc') filtered.sort((a,b) => a.name.localeCompare(b.name));
+  else if (sortVal === 'newest') filtered.sort((a,b) => (b.isNew?1:0) - (a.isNew?1:0));
+
+  const container = document.getElementById('shopProducts');
+  container.innerHTML = filtered.length ? filtered.map(productCardHTML).join('') : '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--light-text);"><p style="font-size:32px;margin-bottom:16px;">🌿</p><p style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--dark);margin-bottom:8px;">No results found</p><p style="font-size:14px;">Try adjusting your filters</p></div>';
+
+  document.getElementById('resultsCount').textContent = `Showing ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+  renderActiveTags(checkedCats, inStockOnly, saleOnly);
+}
+
+function renderActiveTags(checkedCats, inStockOnly, saleOnly) {
+  const container = document.getElementById('activeFilters');
+  let html = '';
+  checkedCats.forEach(c => { html += `<div class="filter-tag" onclick="removeCatFilter('${c}')">${c} <span>✕</span></div>`; });
+  if (inStockOnly) html += `<div class="filter-tag" onclick="document.getElementById('inStockFilter').checked=false;applyFilters()">In Stock <span>✕</span></div>`;
+  if (saleOnly) html += `<div class="filter-tag" onclick="document.getElementById('saleFilter').checked=false;applyFilters()">On Sale <span>✕</span></div>`;
+  selectedColorFilters.forEach(c => { html += `<div class="filter-tag" onclick="removeColorFilter('${c}')">${c} <span>✕</span></div>`; });
+  container.innerHTML = html;
+}
+
+function removeCatFilter(val) {
+  document.querySelectorAll('.cat-filter').forEach(cb => { if(cb.value===val) cb.checked=false; });
+  applyFilters();
+}
+
+function removeColorFilter(val) {
+  selectedColorFilters = selectedColorFilters.filter(c => c !== val);
+  document.querySelectorAll('.color-swatch').forEach(s => { if(s.title===val) s.classList.remove('active'); });
+  applyFilters();
+}
+
+function toggleColorFilter(color, el) {
+  if (selectedColorFilters.includes(color)) {
+    selectedColorFilters = selectedColorFilters.filter(c => c !== color);
+    el.classList.remove('active');
+  } else {
+    selectedColorFilters.push(color);
+    el.classList.add('active');
+  }
+  applyFilters();
+}
+
+function clearFilters() {
+  document.querySelectorAll('.cat-filter').forEach(c => c.checked = false);
+  document.getElementById('priceSlider').value = 10000;
+  document.getElementById('priceLabel').textContent = '₹10,000';
+  document.getElementById('inStockFilter').checked = false;
+  document.getElementById('saleFilter').checked = false;
+  document.getElementById('shopSearch').value = '';
+  selectedColorFilters = [];
+  document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+  applyFilters();
+}
+
+function updatePriceLabel(val) {
+  document.getElementById('priceLabel').textContent = '₹' + parseInt(val).toLocaleString('en-IN');
+}
+
+function setView(v) {
+  isGridView = v === 'grid';
+  document.getElementById('gridViewBtn').classList.toggle('active', isGridView);
+  document.getElementById('listViewBtn').classList.toggle('active', !isGridView);
+  const grid = document.getElementById('shopProducts');
+  grid.classList.toggle('list-view', !isGridView);
+}
+
+function openFilterSidebar() {
+  document.getElementById('filterSidebar').classList.add('open');
+  document.getElementById('filterOverlay').classList.add('show');
+}
+
+function closeFilterSidebar() {
+  document.getElementById('filterSidebar').classList.remove('open');
+  document.getElementById('filterOverlay').classList.remove('show');
+}
+
+// ═══════════════════════
+// PRODUCT DETAIL
+// ═══════════════════════
+function showDetail(id) {
+  const p = products.find(x => x.id === id);
+  currentProduct = p;
+  if (!p) return;
+
+  const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(p.rating));
+  const oldPriceHTML = p.oldPrice ? `<span class="detail-price-old">₹${p.oldPrice.toLocaleString('en-IN')}</span>` : '';
+  const sizesHTML = p.sizes.map((s,i) => `<button class="size-btn ${i===0?'active':''}" onclick="selectSize(this,'${s}')">${s}</button>`).join('');
+  const colorsHTML = p.colors.map((c,i) => {
+    const colorMap = {'Tan':'#C8B49A','Moss':'#6B7B5E','Rust':'#B85C38','Dark Brown':'#3D2B1F','Cream':'#F5F0E8','Sage':'#8B9E8A','One Size':'#C8B49A'};
+    return `<div class="color-swatch ${i===0?'active':''}" style="background:${colorMap[c]||'#C8B49A'};" title="${c}" onclick="this.closest('.detail-colors').querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));this.classList.add('active');"></div>`;
+  }).join('');
+
+  const relatedHTML = products.filter(x => x.id !== id && x.category === p.category).slice(0,3).map(productCardHTML).join('');
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="detail-images">
+      <div class="detail-main-img" style="background:${p.img};">
+        <svg width="80" height="120" viewBox="0 0 80 120" fill="none" opacity="0.3">
+          <ellipse cx="40" cy="16" rx="14" ry="14" fill="rgba(245,240,232,0.7)"/>
+          <path d="M16 32 Q40 24 64 32 L70 90 Q40 80 10 90 Z" fill="rgba(245,240,232,0.6)"/>
+          <rect x="12" y="90" width="12" height="28" rx="3" fill="rgba(245,240,232,0.4)"/>
+          <rect x="56" y="90" width="12" height="28" rx="3" fill="rgba(245,240,232,0.4)"/>
+        </svg>
+      </div>
+      <div class="detail-thumbs">
+        ${[p.img, p.img.replace('160deg','200deg'), p.img.replace('160deg','120deg')].map((bg,i) => `
+          <div class="detail-thumb ${i===0?'active':''}" onclick="this.closest('.detail-thumbs').querySelectorAll('.detail-thumb').forEach(t=>t.classList.remove('active'));this.classList.add('active');" style="background:${bg};"></div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="detail-info">
+      <p class="detail-cat">${p.category}</p>
+      <h1 class="detail-name">${p.name}</h1>
+      <div class="detail-rating">
+        <span class="detail-stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span>
+        <span class="detail-review-count">${p.rating} (${p.reviews} reviews)</span>
+      </div>
+      <div class="detail-price">
+        ₹${p.price.toLocaleString('en-IN')}
+        ${oldPriceHTML}
+      </div>
+      <p class="detail-desc">${p.description}</p>
+
+      <div class="size-label">
+        <span>Size</span>
+        <span class="size-guide">Size Guide</span>
+      </div>
+      <div class="sizes" id="detailSizes">${sizesHTML}</div>
+
+      <p class="color-label">Color</p>
+      <div class="detail-colors">${colorsHTML}</div>
+
+      <div class="detail-add-row">
+        <div class="detail-qty qty-control">
+          <button class="qty-btn" onclick="changeDetailQty(-1)">−</button>
+          <span class="qty-val" id="detailQty">1</span>
+          <button class="qty-btn" onclick="changeDetailQty(1)">+</button>
+        </div>
+        <button class="detail-add-btn" onclick="addToCart(${p.id},parseInt(document.getElementById('detailQty').textContent))">Add to Cart</button>
+        <button class="wishlist-btn" onclick="this.classList.toggle('wishlisted');showToast(this.classList.contains('wishlisted')?'Added to wishlist':'Removed from wishlist')">🤍</button>
+      </div>
+
+      <div class="detail-meta">
+        <div>SKU: <span>TRR-${String(p.id).padStart(4,'0')}</span></div>
+        <div>Category: <span>${p.category}</span></div>
+        <div>Materials: <span>100% Natural Fibres</span></div>
+        <div>Made In: <span>India</span></div>
+      </div>
+    </div>`;
+
+  document.getElementById('detailTabs').innerHTML = `
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('desc',this)">Description</button>
+      <button class="tab-btn" onclick="switchTab('care',this)">Care & Materials</button>
+      <button class="tab-btn" onclick="switchTab('shipping',this)">Shipping</button>
+      <button class="tab-btn" onclick="switchTab('reviews',this)">Reviews (${p.reviews})</button>
+    </div>
+    <div class="tab-content active" id="tab-desc">
+      <p>${p.description}</p>
+      <p>Crafted with intention, each piece in our collection reflects our commitment to slow fashion. We work directly with artisans and weavers across India, ensuring fair wages and sustainable practices at every step.</p>
+    </div>
+    <div class="tab-content" id="tab-care">
+      <p><strong>Fabric:</strong> 100% natural fibres — linen, cotton, or khadi as specified.</p>
+      <p><strong>Washing:</strong> Hand wash or gentle machine cycle in cold water. Use mild, pH-neutral detergent. Do not bleach.</p>
+      <p><strong>Drying:</strong> Lay flat to dry in shade. Avoid direct sunlight to preserve natural dyes.</p>
+      <p><strong>Ironing:</strong> Iron on medium heat while slightly damp for best results.</p>
+    </div>
+    <div class="tab-content" id="tab-shipping">
+      <p><strong>Free standard shipping</strong> on orders above ₹2,499. Estimated delivery: 5–7 business days.</p>
+      <p><strong>Express shipping</strong> available for ₹199. Delivered within 2–3 business days.</p>
+      <p><strong>Returns:</strong> We offer free returns within 30 days of delivery. Items must be unworn, unwashed, and in original packaging.</p>
+    </div>
+    <div class="tab-content" id="tab-reviews">
+      <p>⭐ ${p.rating} out of 5 — based on ${p.reviews} verified reviews.</p>
+      <p>Our customers love the quality and craftsmanship of Terra pieces. Read more reviews on our product pages or share your own experience after your purchase.</p>
+    </div>
+
+    ${relatedHTML ? `
+    <div style="margin-top:60px;">
+      <p class="section-label">You may also like</p>
+      <h2 class="section-title" style="font-size:36px;margin-bottom:32px;">Related Pieces</h2>
+      <div class="products-grid">${relatedHTML}</div>
+    </div>` : ''}
+  `;
+
+  showPage('detail');
+}
+
+function selectSize(btn, size) {
+  document.querySelectorAll('#detailSizes .size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function changeDetailQty(delta) {
+  const el = document.getElementById('detailQty');
+  const val = Math.max(1, parseInt(el.textContent) + delta);
+  el.textContent = val;
+}
+
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ═══════════════════════
+// CART
+// ═══════════════════════
+function addToCart(id, qty = 1) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  const existing = cart.find(i => i.id === id);
+  if (existing) existing.qty += qty;
+  else cart.push({ id, qty, name: p.name, price: p.price, category: p.category, img: p.img });
+  saveCart();
+  updateCartCount();
+  showToast(`"${p.name}" added to cart`);
+}
+
+function saveCart() {
+  localStorage.setItem('terra_cart', JSON.stringify(cart));
+}
+
+function updateCartCount() {
+  const total = cart.reduce((s, i) => s + i.qty, 0);
+  const el = document.getElementById('cartCount');
+  if (total > 0) { el.textContent = total; el.classList.remove('hidden'); }
+  else el.classList.add('hidden');
+}
+
+function renderCart() {
+  const container = document.getElementById('cartContent');
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything yet.</p>
+        <button class="btn-primary" style="background:var(--bark);color:var(--cream);" onclick="showShop()">Start Shopping</button>
+      </div>`;
+    return;
+  }
+
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const shipping = subtotal >= 2499 ? 0 : 199;
+  const total = subtotal + shipping;
+
+  const itemsHTML = cart.map(item => `
+    <div class="cart-item" id="ci-${item.id}">
+      <div class="cart-item-img">
+        <div class="cart-item-img-bg" style="background:${item.img};">
+          <svg width="36" height="52" viewBox="0 0 36 52" fill="none" opacity="0.35">
+            <ellipse cx="18" cy="7" rx="6" ry="6" fill="rgba(245,240,232,0.7)"/>
+            <path d="M6 14 Q18 10 30 14 L33 40 Q18 36 3 40 Z" fill="rgba(245,240,232,0.6)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="cart-item-details">
+        <p class="cart-item-cat">${item.category}</p>
+        <h3 class="cart-item-name">${item.name}</h3>
+        <p class="cart-item-meta">Size: M &nbsp;|&nbsp; Color: Natural</p>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="updateCartQty(${item.id},-1)">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" onclick="updateCartQty(${item.id},1)">+</button>
+        </div>
+      </div>
+      <div class="cart-item-price-col">
+        <span class="cart-item-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+        <button class="remove-btn" onclick="removeFromCart(${item.id})" title="Remove">✕</button>
+      </div>
+    </div>`).join('');
+
+  container.innerHTML = `
+    <div class="cart-layout">
+      <div>
+        <div class="cart-items">${itemsHTML}</div>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+          <button onclick="showShop()" style="background:none;border:1px solid var(--border);padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;color:var(--dark);transition:all 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='none'">← Continue Shopping</button>
+        </div>
+      </div>
+      <div class="cart-summary">
+        <h3 class="summary-title">Order Summary</h3>
+        <div class="summary-row"><span class="summary-label">Subtotal (${cart.reduce((s,i)=>s+i.qty,0)} items)</span><span class="summary-value">₹${subtotal.toLocaleString('en-IN')}</span></div>
+        <div class="summary-row"><span class="summary-label">Shipping</span><span class="summary-value" style="color:${shipping===0?'var(--moss)':'var(--dark)'}">${shipping === 0 ? 'FREE' : '₹' + shipping}</span></div>
+        ${shipping > 0 ? `<div style="font-size:11px;color:var(--brown);margin-bottom:8px;">Add ₹${(2499 - subtotal).toLocaleString('en-IN')} more for free shipping</div>` : ''}
+        <div class="coupon-row">
+          <input type="text" placeholder="Coupon code" id="couponInput">
+          <button onclick="applyCoupon()">Apply</button>
+        </div>
+        <div class="summary-row total"><span class="summary-label">Total</span><span class="summary-value" style="font-size:20px;">₹${total.toLocaleString('en-IN')}</span></div>
+        <button class="checkout-btn" onclick="showToast('Proceeding to checkout…')">Proceed to Checkout →</button>
+        <div class="payment-icons">
+          <span class="payment-icon">UPI</span>
+          <span class="payment-icon">VISA</span>
+          <span class="payment-icon">MC</span>
+          <span class="payment-icon">COD</span>
+        </div>
+        <p style="font-size:11px;text-align:center;color:var(--light-text);margin-top:12px;">🔒 Secure 256-bit SSL Encryption</p>
+      </div>
+    </div>`;
+}
+
+function updateCartQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  saveCart();
+  updateCartCount();
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  saveCart();
+  updateCartCount();
+  renderCart();
+  showToast('Item removed from cart');
+}
+
+function applyCoupon() {
+  const val = document.getElementById('couponInput').value.trim().toUpperCase();
+  if (val === 'TERRA10') showToast('Coupon applied! 10% off 🎉');
+  else if (val === 'WELCOME') showToast('Coupon applied! ₹200 off 🎉');
+  else showToast('Invalid coupon code');
+}
+
+// ═══════════════════════
+// SEARCH
+// ═══════════════════════
+function toggleSearch() { showShop(); document.getElementById('shopSearch').focus(); }
+
+// ═══════════════════════
+// TOAST
+// ═══════════════════════
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ═══════════════════════
+// NEWSLETTER
+// ═══════════════════════
+function subscribeNewsletter() {
+  const email = document.getElementById('newsletterEmail').value;
+  if (email && email.includes('@')) {
+    showToast('Welcome to the Terra Circle! 🌿');
+    document.getElementById('newsletterEmail').value = '';
+  } else {
+    showToast('Please enter a valid email address');
+  }
+}
+
+// ═══════════════════════
+// INIT
+// ═══════════════════════
+updateCartCount();
+renderFeaturedProducts();
+</script>
+</body>
+</html>
